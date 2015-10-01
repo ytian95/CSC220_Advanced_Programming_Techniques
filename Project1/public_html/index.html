@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Town Data Plot</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .wrapper{
+               display: inline-block;
+               vertical-align: baseline;
+               position: relative;
+               margin-left: 10px;
+               margin-right: 10px;
+            }
+            
+            .bar{
+               width: 50px;
+               background: #ccc;
+               
+/*               height: 50px;*/
+            }
+            
+            .bar:hover{
+                background: red;
+            }
+            
+            .label, .value{
+                width: 54px;
+                text-align: center;
+                display: inline-block;
+            }
+            
+            
+            .value{
+                opacity: 0;
+            }
+            
+/*            .value:hover{
+                opacity: .9;
+            }
+            */
+            .header{
+                display: inline-block;
+            }
+        </style>
+        
+        <script src="data.js"></script>
+        <script src="graph.js"></script>
+        <script>
+            function initializeGraph(maxHeight){
+                graph = new Graph(maxHeight);
+            }
+            
+            function createGraph(index){
+                var dataOfTown = data[index];
+                graph.addBarsFromData(dataOfTown);
+                document.getElementById("townName").innerHTML = dataOfTown.getName();
+                graph.addedLabels();
+            }
+            
+            function submit(){
+                graph.removeGraph();
+                var e = document.getElementById("townDropdown");
+                createGraph(e.selectedIndex);
+            };
+            
+            function enterBar(id){
+                document.getElementById("Text" + id)
+                        .setAttribute("style", "opacity: 1");
+                console.info(id);
+            }
+            
+            function exitBar(id){
+                document.getElementById("Text" + id)
+                        .setAttribute("style", "opacity: 0");
+            }
+//            function getSelectedName(){
+//                var e = document.getElementById("townDropdown");
+//                console.log(e.options[e.selectedIndex].text);
+//                return(e.options[e.selectedIndex].text);
+//            };
+        </script>
+    </head>
+    <body>
+        <select id="townDropdown" class="header" onchange="submit()">
+            <option selected>Northampton</option>
+            <option>Amherst</option>
+            <option>Easthampton</option>
+        </select>
+        <div id="townName" class="header"></div>
+        <div id="graphLoc"></div>
+        <div id="labelsLoc"></div>
+        <script>
+            initializeGraph(410);
+            createGraph(0);
+        </script>
+    </body>
+</html>
