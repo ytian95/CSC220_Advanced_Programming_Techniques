@@ -20,8 +20,6 @@ CustomGameLoop.prototype.setCanvasSize = function(width, height){
 
 //override
 CustomGameLoop.prototype.addElement = function(element){
-    //notice that not calling a draw medthod in the setupTest
-    //does that mean need to update in addElement?
     this.elements.add(element);
 }
 

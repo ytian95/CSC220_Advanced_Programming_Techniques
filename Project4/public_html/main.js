@@ -10,14 +10,14 @@ function setupTestScenario() {
     backgroundImage.setHeight(420);
     gameLoop.addElement(backgroundImage);
     
-//    var rectangle = new Rectangle();
-//    rectangle.setPosition(new Point(100, 60));
-//    rectangle.setWidth(200);
-//    rectangle.setHeight(150);
-//    rectangle.setFillColor("red");
-//    rectangle.setStrokeColor("orange");
-//    rectangle.setStrokeThickness(5);
-//    gameLoop.addElement(rectangle);
+    var rectangle = new Rectangle();
+    rectangle.setPosition(new Point(100, 60));
+    rectangle.setWidth(200);
+    rectangle.setHeight(150);
+    rectangle.setFillColor("red");
+    rectangle.setStrokeColor("orange");
+    rectangle.setStrokeThickness(5);
+    gameLoop.addElement(rectangle);
 //    
 //    var circle = new Circle();
 //    circle.setPosition(new Point(170, 140));
