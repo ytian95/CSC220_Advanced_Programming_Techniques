@@ -18,24 +18,33 @@ function setupTestScenario() {
     rectangle.setStrokeColor("orange");
     rectangle.setStrokeThickness(5);
     gameLoop.addElement(rectangle);
-//    
-//    var circle = new Circle();
-//    circle.setPosition(new Point(170, 140));
-//    circle.setWidth(150);
-//    circle.setHeight(110);
-//    circle.setFillColor("#2BBDBD");
-//    circle.setStrokeColor("orange");
-//    circle.setStrokeThickness(5);
-//    gameLoop.addElement(circle);
-//
-//    var triangle = new Triangle();
-//    triangle.setPosition(new Point(500, 200));
-//    triangle.setWidth(100);
-//    triangle.setHeight(200);
-//    triangle.setFillColor("purple");
-//    triangle.setStrokeColor("white");
-//    triangle.setStrokeThickness(2);
-//    gameLoop.addElement(triangle);
+    
+    var circle = new Circle();
+    circle.setPosition(new Point(170, 140));
+    circle.setWidth(150);
+    circle.setHeight(110);
+    circle.setFillColor("#2BBDBD");
+    circle.setStrokeColor("orange");
+    circle.setStrokeThickness(5);
+    gameLoop.addElement(circle);
+
+    var triangle = new Triangle();
+    triangle.setPosition(new Point(500, 200));
+    triangle.setWidth(100);
+    triangle.setHeight(200);
+    triangle.setFillColor("purple");
+    triangle.setStrokeColor("white");
+    triangle.setStrokeThickness(2);
+    gameLoop.addElement(triangle);
+    
+    var triangle = new Triangle();
+    triangle.setPosition(new Point(300, 200));
+    triangle.setWidth(100);
+    triangle.setHeight(100);
+    triangle.setFillColor("purple");
+    triangle.setStrokeColor("green");
+    triangle.setStrokeThickness(3);
+    gameLoop.addElement(triangle);
 }
 
 function initialize() {
