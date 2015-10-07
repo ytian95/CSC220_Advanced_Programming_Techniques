@@ -14,7 +14,7 @@ Pointer.prototype.move = function(position){
     }
 }
 
-Pointer.prototype.getPosition = function(position){
+Pointer.prototype.getPosition = function(){
     return this.position.clone();
 }
 
@@ -31,7 +31,6 @@ Pointer.prototype.deactivate = function(){
 }
 
 Pointer.prototype.hasSelectedElement = function(){
-    
     if(this.element !== null && this.isActive){
         return true;
     }
@@ -42,6 +41,7 @@ Pointer.prototype.selectElement = function(element){
     if(element !== null && this.isActive){
         this.element = element;
         this.element.findOffset(this.position);
+        //this.element.setDraggable(true);
     }
 }
 

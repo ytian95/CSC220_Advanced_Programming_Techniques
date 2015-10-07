@@ -1,6 +1,7 @@
 function DraggableElement(){
     this.offsetX;
     this.offsetY;
+    //this.isDraggable;
 }
 DraggableElement.prototype = new HitTestableElement();
 
@@ -13,3 +14,7 @@ DraggableElement.prototype.move = function(position){
     this.point.setX(position.getX() - this.offsetX);
     this.point.setY(position.getY() - this.offsetY);
 }
+
+//DraggableElement.prototype.setDraggable = function(draggable){
+//    this.isDraggable = draggable;
+//}

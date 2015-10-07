@@ -16,9 +16,9 @@ ElementManager.prototype.remove = function(element){
     this.elements.splice(this.elements.indexOf(element));
 }
 
-ElementManager.prototype.getElements = function(){
-    return this.elements;
-}
+//ElementManager.prototype.getElements = function(){
+//    return this.elements;
+//}
 
 ElementManager.prototype.getElementAtPosition = function(index){
     return this.elements[index];
