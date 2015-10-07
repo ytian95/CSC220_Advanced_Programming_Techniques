@@ -7,7 +7,7 @@ CustomGameLoop.prototype = new GameLoop();
 CustomGameLoop.prototype.initialize = function(canvas){
     GameLoop.prototype.initialize.call(this, canvas);
     this.elementManager = new ElementManager(); //an element manager?
-    this.pointerManager = new PointerManager();
+    this.pointerManager = new PointerManager(this.elementManager);
     //so when calling addElement, actually
     //adding it to the element manager
     //this.setCanvasSize(600, 400);

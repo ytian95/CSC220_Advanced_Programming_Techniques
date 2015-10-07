@@ -1,5 +1,6 @@
-function PointerManager(){
+function PointerManager(elementManager){
     this.pointers = {};
+    this.elementManager = elementManager;
 }
 
 PointerManager.prototype.addPointer = function(id, position){
@@ -28,14 +29,28 @@ PointerManager.prototype.onPointerMove = function(id, position){
 }
 
 PointerManager.prototype.onPointerActivate = function(id, position){
+    //position given is the position relative to the canvas
+    console.log(position.getX() + ", " + position.getY());
     this.pointers[id].activate();
+    this.setElementToPointer(id, position);
 }
 
 PointerManager.prototype.onPointerDeactivate = function(id, position){
+    console.log(id + " has released something");
     this.pointers[id].deactivate();
+    this.unsetElementToPointer(id);
 }
 
 PointerManager.prototype.onPointerLeave = function(id, position){
     console.log(id + " has left");
     this.removePointer(id, position);
+}
+
+PointerManager.prototype.setElementToPointer = function(id, position){
+        var element = this.elementManager.hitTest(position);
+        this.pointers[id].selectElement(element);
+}
+
+PointerManager.prototype.unsetElementToPointer = function(id){
+    this.pointers[id].deselectElement();
 }
