@@ -3,7 +3,6 @@ function HitTestableElement(){
 }
 HitTestableElement.prototype = new Visual();
 
-//using the width and height from visual to hit test
 HitTestableElement.prototype.hitTest = function(p){
     if((p.getX() >= this.point.getX() &&
             p.getX() <= this.point.getX() + this.width) &&

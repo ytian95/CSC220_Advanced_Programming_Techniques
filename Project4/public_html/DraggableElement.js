@@ -13,4 +13,3 @@ DraggableElement.prototype.move = function(position){
     this.point.setX(position.getX() - this.offsetX);
     this.point.setY(position.getY() - this.offsetY);
 }
-//take in position and change it

@@ -3,7 +3,6 @@ function BackgroundImage(){
 }
 BackgroundImage.prototype = new Visual();
 
-//file path
 BackgroundImage.prototype.loadUrl = function(file){
     this.image.src = file;
 }

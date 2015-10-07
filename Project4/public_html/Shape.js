@@ -1,7 +1,7 @@
 function Shape(){
-    this.fillColor;// = fillColor;
-    this.strokeColor;// = strokeColor;
-    this.strokeThickness;// = strokeThickness;
+    this.fillColor;
+    this.strokeColor;
+    this.strokeThickness;
 }
 Shape.prototype = new DraggableElement();
 

@@ -31,6 +31,7 @@ Pointer.prototype.deactivate = function(){
 }
 
 Pointer.prototype.hasSelectedElement = function(){
+    
     if(this.element !== null && this.isActive){
         return true;
     }
@@ -38,7 +39,7 @@ Pointer.prototype.hasSelectedElement = function(){
 }
 
 Pointer.prototype.selectElement = function(element){
-    if(this.hasSelectedElement){
+    if(element !== null && this.isActive){
         this.element = element;
         this.element.findOffset(this.position);
     }

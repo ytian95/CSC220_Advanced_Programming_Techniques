@@ -36,15 +36,6 @@ function setupTestScenario() {
     triangle.setStrokeColor("white");
     triangle.setStrokeThickness(2);
     gameLoop.addElement(triangle);
-//    
-//    var triangle = new Triangle();
-//    triangle.setPosition(new Point(300, 200));
-//    triangle.setWidth(100);
-//    triangle.setHeight(100);
-//    triangle.setFillColor("purple");
-//    triangle.setStrokeColor("green");
-//    triangle.setStrokeThickness(3);
-//    gameLoop.addElement(triangle);
 }
 
 function initialize() {
