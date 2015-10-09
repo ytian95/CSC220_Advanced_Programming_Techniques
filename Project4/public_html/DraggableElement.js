@@ -1,7 +1,7 @@
 function DraggableElement(){
     this.offsetX;
     this.offsetY;
-    //this.isDraggable;
+    this.isDragged = false;
 }
 DraggableElement.prototype = new HitTestableElement();
 
@@ -11,10 +11,16 @@ DraggableElement.prototype.findOffset = function(position){
 }
 
 DraggableElement.prototype.move = function(position){
-    this.point.setX(position.getX() - this.offsetX);
-    this.point.setY(position.getY() - this.offsetY);
+    if(this.isDragged){
+        this.point.setX(position.getX() - this.offsetX);
+        this.point.setY(position.getY() - this.offsetY);
+    }
 }
 
-//DraggableElement.prototype.setDraggable = function(draggable){
-//    this.isDraggable = draggable;
-//}
+DraggableElement.prototype.activateDraggableElement = function(){
+    this.isDragged = true;
+}
+
+DraggableElement.prototype.deactivateDraggableElement = function(){
+    this.isDragged = false;
+}

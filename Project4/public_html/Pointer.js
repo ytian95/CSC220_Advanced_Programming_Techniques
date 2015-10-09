@@ -10,7 +10,7 @@ Pointer.prototype.move = function(position){
     this.position.setY(position.getY());
     
     if(this.hasSelectedElement()){
-        this.moveElement(position);
+        this.element.move(position);
     }
 }
 
@@ -40,15 +40,26 @@ Pointer.prototype.hasSelectedElement = function(){
 Pointer.prototype.selectElement = function(element){
     if(element !== null && this.isActive){
         this.element = element;
+        this.element.activateDraggableElement();
         this.element.findOffset(this.position);
-        //this.element.setDraggable(true);
     }
 }
 
 Pointer.prototype.deselectElement = function(){
+    if(this.element !== null){
+        this.element.deactivateDraggableElement();
+    }
     this.element = null;
 }
 
 Pointer.prototype.moveElement = function(position){
     this.element.move(position);
+}
+
+Pointer.prototype.activateDraggableElement = function(){
+    this.element.activateDrag();
+}
+
+Pointer.prototype.deactivateDraggableElement = function(){
+    this.element.deactivateDrag();
 }

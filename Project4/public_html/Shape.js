@@ -1,3 +1,4 @@
+// <editor-fold desc="Shape">
 function Shape(){
     this.fillColor;
     this.strokeColor;
@@ -32,7 +33,9 @@ Shape.prototype.draw = function(g){
 Shape.prototype.drawPath = function(g){
     
 }
+// <editor-fold>
 
+// <editor-fold desc="Rectangle">
 function Rectangle(){
     
 }
@@ -42,7 +45,9 @@ Rectangle.prototype.drawPath = function(g){
     g.rect(this.point.getX(), this.point.getY(),
         this.width, this.height);
 }
+// <editor-ford>
 
+// <editor-fold desc="Circle>
 function Circle(){
     
 }
@@ -52,7 +57,9 @@ Circle.prototype.drawPath = function(g){
     TOOLS.drawEllipse(g, this.point.getX(), this.point.getY(),
         this.width, this.height);
 }
+//<editor-fold>
 
+//<editor-fold desc="Triangle">
 function Triangle(){
     
 }
@@ -67,3 +74,4 @@ Triangle.prototype.drawPath = function(g){
     g.lineTo(x + this.width/2, y);
     g.lineTo(x, y + this.height);
 }
+// <editor-fold>
