@@ -1,16 +1,13 @@
 [
-	{
-	"firstname":"Kane",
-	"surname":"Montez",
-	"phone":{"home": "111-1111",
-		 "cell": "222-2222"
-		}
-	},
-	{
-	"firstname":"Quinn",
-	"surname":"Harper",
-	"phone":{"home":"333-3333",
-		 "cell":"444-4444"
-		}
+"meta" : {
+    "view" : {
+      "id" : "usfg-z9mx",
+      "name" : "Average Electricity Usage per Square Foot by Community Area",
+      "attribution" : "City of Chicago",
+      "attributionLink" : "http://www.cityofchicago.org",
+      "averageRating" : 0,
+      "category" : "Environment & Sustainable Development",
+      "createdAt" : 1367090023
+	}
 	}
 ]
