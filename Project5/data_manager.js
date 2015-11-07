@@ -1,8 +1,9 @@
 function DataManager(){
     this.data = {
-        columns:[],
-        dataSets:{}
+//        columns:{},
+//        dataSets:{}
     };
+    this.counter = 0;
     this.thisFunc = this;
     this.initialize();
     console.log("get data!");
@@ -28,14 +29,14 @@ DataManager.prototype.httpRequest = function(fileName, dataType){
     
     xmlhttp.onreadystatechange = function(){
         if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
-            var myArr = JSON.parse(xmlhttp.responseText);
+            xmlhttp.associatedDataPacket.dataParsed = JSON.parse(xmlhttp.responseText);
             //console.log(myArr);
-            xmlhttp.associatedDataPacket.dataParsed = thisFunc.parseData(myArr, dataType);
+            //xmlhttp.associatedDataPacket["dataParsed"] = thisFunc.parseData(myArr, dataType);
         }
     };
     //this.parseData(.associatedDataPacket.dataParsed, dataType);
     console.log(this.data);
-    console.log(xmlhttp.associatedDataPacket.dataParsed);
+    console.log(this.dataParsed);
     xmlhttp.send();
 }
 
@@ -51,21 +52,26 @@ DataManager.prototype.parseData = function(myArr, dataType){
             dataIndex = i;
         }
     }
-    this.data.columns.push(dataType);
+    var n = "name" + this.counter;
+    this.counter += 1;
+    console.log(n);
+    this.data["columns"][n] = dataType;
     this.data.dataSets[dataType] = [];
     for(var i = 0; i < myArr.data.length; i++) {
         //console.log(myArr.data[i]);
         var communityName = myArr.data[i][communityIndex];
         var datum = myArr.data[i][dataIndex];
         var dataPoint = new Datum(communityName, datum);
-        this.data.dataSets[dataType].push(dataPoint);
+        this.data["dataSets"][dataType][i] = dataPoint;
     }
+    return this.data;
 }
 
 DataManager.prototype.getData = function(index){
-    console.log(this);
-    var a = this.data.columns;
-    console.log(a["0"]);
+    console.log(JSON.stringify(this.data));
+    var a = this.data.dataSets;
+    console.log(a);
+    console.log(a["kwh_total_sqft"]);
     console.log(this.getName(index));
     console.log(this.data.dataSets[this.getName(index)]);
     return this.thisFunc.data.dataSets[this.getName(index)];
