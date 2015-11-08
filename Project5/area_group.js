@@ -3,6 +3,15 @@ function AreaGroup(){
     this.maxColumns = 3;
 }
 
+AreaGroup.prototype.setName = function(name){
+    this.name = name;
+}
+
+//works for the most part
+AreaGroup.prototype.getName = function(){
+    return this.name;
+}
+
 AreaGroup.prototype.setMaxColumns = function(maxCols){
     this.maxColumns = maxCols;
 }
@@ -21,6 +30,7 @@ AreaGroup.prototype.findMax = function(dataSet){
 AreaGroup.prototype.addDataPoints = function(dataSet){
     var cols = 0;
     var rows = 0;
+    console.log(dataSet);
     var maxValue = this.findMax(dataSet);
     for(var i = 0; i < dataSet.length; i++){
         var dataPiece = dataSet[i];
@@ -42,12 +52,14 @@ AreaGroup.prototype.addDataPoints = function(dataSet){
         }
         cols += 1;
     }
+    
+    console.log(this.elements);
 }
 
 AreaGroup.prototype.hitTestAndFind = function(position){
     for(var i = this.elements.length - 1; i >= 0; i--){
         //only going to contain classes instance of HitTestable
-        if(this.elements[i].hitTestPosition){
+        if(this.elements[i].hitTest(position)){
             return this.elements[i];
         }
     }

@@ -11,15 +11,22 @@ function setupTestScenario() {
 
 function addElementsFromData(gameLoop){
     var data = gameLoop.getData(0);
+    var name = gameLoop.getName(0);
     //console.log(data);
     var areaGroup = new AreaGroup();
+    areaGroup.setName(name);
     areaGroup.addDataPoints(data);
+    console.log(areaGroup);
     gameLoop.addElement(areaGroup);
 }
 
 function initialize() {
-    //console.log(initialize)
     setupTestScenario();
+//    var dm = new DataManager();
+//    var data = dm.getData(0);
+//    var ag = new AreaGroup();
+//    ag.addDataPoints(data);
+//    console.log(ag);
 }
 
 window.onload = initialize;

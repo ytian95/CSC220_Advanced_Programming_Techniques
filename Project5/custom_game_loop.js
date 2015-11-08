@@ -23,6 +23,10 @@ CustomGameLoop.prototype.getData = function(index){
     return(this.dataManager.getData(index));
 }
 
+CustomGameLoop.prototype.getName = function(index){
+    return(this.dataManager.getName(index));
+}
+
 CustomGameLoop.prototype.test = function(){
     this.dataManager.test();
 }

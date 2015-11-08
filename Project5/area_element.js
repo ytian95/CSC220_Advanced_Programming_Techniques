@@ -9,6 +9,10 @@ AreaElement.prototype.addData = function(dataPiece){
     this.data = dataPiece;
 }
 
+AreaElement.prototype.getData = function(){
+    return this.data;
+}
+
 AreaElement.prototype.setPercent = function(percent){
     this.percent = percent;
 }

@@ -16,26 +16,48 @@ DataManager.prototype.initialize = function(){
 
 DataManager.prototype.createFakeData = function(){
     //Will be using this data until can fix parser
-    this.data = {
+//    this.data = {
+//      names : {
+//          0 : "kwh_total_sqft",
+//          1 : "therms_total_sqft"
+//      },
+//      dataSets : {
+//          kwh_total_sqft : {
+//              0 : new DataPiece("Albany Park", 16294),
+//              1 : new DataPiece("Archer Heights", 20489),
+//              2 : new DataPiece("Armour Square", 25015),
+//              3 : new DataPiece("Ashburn", 20145),
+//              4 : new DataPiece("Auburn Gresham", 15176)
+//          },
+//          therms_total_sqft : {
+//              0 : new DataPiece("Albany Park", 16103),
+//              1 : new DataPiece("Archer Heights", 24965),
+//              2 : new DataPiece("Armour Square", 24651),
+//              3 : new DataPiece("Ashburn", 20496),
+//              4 : new DataPiece("Auburn Gresham", 14707)
+//          }
+//      }
+//  };
+this.data = {
       names : {
           0 : "kwh_total_sqft",
           1 : "therms_total_sqft"
       },
       dataSets : {
-          kwh_total_sqft : {
-              0 : new DataPiece("Albany Park", 16294),
-              1 : new DataPiece("Archer Heights", 20489),
-              2 : new DataPiece("Armour Square", 25015),
-              3 : new DataPiece("Ashburn", 20145),
-              4 : new DataPiece("Auburn Gresham", 15176)
-          },
-          therms_total_sqft : {
-              0 : new DataPiece("Albany Park", 16103),
-              1 : new DataPiece("Archer Heights", 24965),
-              2 : new DataPiece("Armour Square", 24651),
-              3 : new DataPiece("Ashburn", 20496),
-              4 : new DataPiece("Auburn Gresham", 14707)
-          }
+          kwh_total_sqft : [
+              new DataPiece("Albany Park", 16294),
+              new DataPiece("Archer Heights", 20489),
+              new DataPiece("Armour Square", 25015),
+              new DataPiece("Ashburn", 20145),
+              new DataPiece("Auburn Gresham", 15176)
+          ],
+          therms_total_sqft : [
+              new DataPiece("Albany Park", 16103),
+              new DataPiece("Archer Heights", 24965),
+              new DataPiece("Armour Square", 24651),
+              new DataPiece("Ashburn", 20496),
+              new DataPiece("Auburn Gresham", 14707)
+          ]
       }
   };
 }
@@ -58,7 +80,7 @@ DataManager.prototype.httpRequest = function(fileName, dataName){
             this.originalData = JSON.parse(xmlhttp.responseText);
             thisClass.parseData(this.originalData, dataName);
         }
-        console.log(this.originalData);
+        //console.log(this.originalData);
     }
     //the problem is that the onreadystatechange gets called independent of
     //the httpRequest function. Thus, unknown if have access when another
@@ -93,10 +115,12 @@ DataManager.prototype.parseData = function(originalData, dataName){
     }
 }
 
+//working
 DataManager.prototype.getName = function(index){
     return this.data.names[index];
 }
 
+//working
 DataManager.prototype.getData = function(index){
     return this.data.dataSets[this.getName(index)];
 }
