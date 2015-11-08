@@ -1,6 +1,6 @@
 function AreaGroup(){
     this.elements = [];
-    this.maxColumns = 3;
+    this.maxColumns = 2;
 }
 
 AreaGroup.prototype.setName = function(name){
@@ -46,11 +46,14 @@ AreaGroup.prototype.addDataPoints = function(dataSet){
         areaElem.setMaxColor("red"); //change to rgb later
 
         this.elements.push(areaElem);
-        if(cols === this.maxCols){
+        console.log(cols);
+        if(cols === this.maxColumns){
             cols = 0;
             rows += 1;
         }
-        cols += 1;
+        else{
+            cols += 1;
+        }
     }
     
     console.log(this.elements);
@@ -60,6 +63,7 @@ AreaGroup.prototype.hitTestAndFind = function(position){
     for(var i = this.elements.length - 1; i >= 0; i--){
         //only going to contain classes instance of HitTestable
         if(this.elements[i].hitTest(position)){
+            console.log("hit tested " + i);
             return this.elements[i];
         }
     }

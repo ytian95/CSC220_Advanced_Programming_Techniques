@@ -8,16 +8,16 @@ ElementManager.prototype.draw = function(g){
     //console.log("drawing");
     for(var i = 0; i < this.elements.length; i++){
         if(!(this.elements[i] instanceof AreaGroup)){
-            console.log("is not a areagroup");
+            //console.log("is not a areagroup");
             this.elements[i].draw(g);
         }
         else{
-            console.log("in the else");
-            console.log(this.dataManager.getName(this.currentPageIndex));
+//            console.log("in the else");
+//            console.log(this.dataManager.getName(this.currentPageIndex));
             if( this.dataManager.getName(this.currentPageIndex)
                 === this.elements[i].getName()){
             
-                console.log("is a areagroup");
+                //console.log("is a areagroup");
                 this.elements[i].draw(g);
             }
         }

@@ -32,6 +32,9 @@ CustomGameLoop.prototype.test = function(){
 }
 
 CustomGameLoop.prototype.draw = function(g){
+    //console.log("fill fill");
+    g.fillStyle = "lightgray";
+    g.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.elementManager.draw(g);
 }
 
