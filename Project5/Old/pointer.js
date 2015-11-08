@@ -40,14 +40,26 @@ Pointer.prototype.hasSelectedElement = function(){
 Pointer.prototype.selectElement = function(element){
     if(element !== null && this.isActive){
         this.element = element;
+        this.element.activateDraggableElement();
         this.element.findOffset(this.position);
     }
 }
 
 Pointer.prototype.deselectElement = function(){
+    if(this.element !== null){
+        this.element.deactivateDraggableElement();
+    }
     this.element = null;
 }
 
 Pointer.prototype.moveElement = function(position){
     this.element.move(position);
+}
+
+Pointer.prototype.activateDraggableElement = function(){
+    this.element.activateDrag();
+}
+
+Pointer.prototype.deactivateDraggableElement = function(){
+    this.element.deactivateDrag();
 }

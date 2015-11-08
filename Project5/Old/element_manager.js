@@ -33,12 +33,8 @@ ElementManager.prototype.getElementAtPosition = function(index){
 
 ElementManager.prototype.hitTest = function(position){
     for(var i = this.elements.length - 1; i >= 0; i--){
-        if(this.elements[i] instanceof AreaGroup){
-            return this.elements[i].hitTestAndFind(position);
-        }
-        else if(this.elements[i] instanceof HitTestableElement &&
-            this.elements[i].hitTest(position)){
-                return this.elements[i];
+        if(this.elements[i].hitTest(position)){
+            return this.elements[i];
         }
     }
     return null;

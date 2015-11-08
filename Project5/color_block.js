@@ -1,7 +1,27 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+function ColorBlock(xArray, yArray, maxColor){
+    this.xArray = xArray;
+    this.yArray = yArray;
+    this.maxColor = maxColor;
+}
+ColorBlock.prototype = new DraggableElement();
 
+ColorBlock.prototype.getXArray = function(){
+    return this.xArray;
+}
+
+ColorBlock.prototype.getYArray = function(){
+    return this.yArray;
+}
+
+ColorBlock.prototype.setXArray = function(xArray){
+    this.xArray = xArray;
+}
+
+ColorBlock.prototype.setYArray = function(yArray){
+    this.yArray = yArray;
+}
+
+ColorBlock.prototype.setMaxColor = function(maxColor){
+    this.maxColor = maxColor;
+}
 

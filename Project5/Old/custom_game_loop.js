@@ -19,6 +19,10 @@ CustomGameLoop.prototype.addElement = function(element){
     this.elementManager.add(element);
 }
 
+CustomGameLoop.prototype.addElementsFromData = function(){
+    this.elementManager.addElementsFromData();
+}
+
 CustomGameLoop.prototype.getData = function(index){
     return(this.dataManager.getData(index));
 }
