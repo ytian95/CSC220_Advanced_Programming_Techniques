@@ -1,7 +1,7 @@
 function ColorBlock(xArray, yArray, maxColor){
     this.xArray = xArray;
     this.yArray = yArray;
-    this.maxColor = maxColor;
+    this.maxRGBColor = maxColor;
 }
 ColorBlock.prototype = new DraggableElement();
 
@@ -21,7 +21,7 @@ ColorBlock.prototype.setYArray = function(yArray){
     this.yArray = yArray;
 }
 
-ColorBlock.prototype.setMaxColor = function(maxColor){
-    this.maxColor = maxColor;
+ColorBlock.prototype.setMaxRGBColor = function(RGBColor){
+    this.maxRGBColor = RGBColor;
 }
 

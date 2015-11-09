@@ -15,7 +15,7 @@ function addElementsFromData(gameLoop){
     //console.log(data);
     var areaGroup = new AreaGroup();
     areaGroup.setName(name);
-    areaGroup.addDataPoints(data);
+    areaGroup.addDataPoints(data, [200, 0, 0]);
     console.log(areaGroup);
     gameLoop.addElement(areaGroup);
     
@@ -24,7 +24,7 @@ function addElementsFromData(gameLoop){
     //console.log(data);
     var areaGroup = new AreaGroup();
     areaGroup.setName(name);
-    areaGroup.addDataPoints(data);
+    areaGroup.addDataPoints(data, [0, 0, 255]);
     console.log(areaGroup);
     gameLoop.addElement(areaGroup);
     
