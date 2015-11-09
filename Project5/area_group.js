@@ -27,7 +27,7 @@ AreaGroup.prototype.findMax = function(dataSet){
     return max;
 }
 
-AreaGroup.prototype.addDataPoints = function(dataSet){
+AreaGroup.prototype.addDataPoints = function(dataSet, color){
     var cols = 0;
     var rows = 0;
     console.log(dataSet);
@@ -43,7 +43,7 @@ AreaGroup.prototype.addDataPoints = function(dataSet){
         areaElem.setXY();
         areaElem.addData(dataPiece);
         areaElem.setPercent(dataPiece.getValue()/maxValue);
-        areaElem.setMaxColor("red"); //change to rgb later
+        areaElem.setMaxColor(color); //change to rgb later
 
         this.elements.push(areaElem);
         console.log(cols);

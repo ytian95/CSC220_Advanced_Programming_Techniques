@@ -28,11 +28,13 @@ PointerManager.prototype.onPointerMove = function(id, position){
 }
 
 PointerManager.prototype.onPointerActivate = function(id, position){
+    console.log("activated!");
     this.pointers[id].activate();
     this.setElementToPointer(id, position);
 }
 
 PointerManager.prototype.onPointerDeactivate = function(id, position){
+    console.log("deactivated!");
     this.pointers[id].deactivate();
     this.unsetElementToPointer(id);
 }

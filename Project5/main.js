@@ -18,6 +18,21 @@ function addElementsFromData(gameLoop){
     areaGroup.addDataPoints(data);
     console.log(areaGroup);
     gameLoop.addElement(areaGroup);
+    
+    data = gameLoop.getData(1);
+    name = gameLoop.getName(1);
+    //console.log(data);
+    var areaGroup = new AreaGroup();
+    areaGroup.setName(name);
+    areaGroup.addDataPoints(data);
+    console.log(areaGroup);
+    gameLoop.addElement(areaGroup);
+//    
+//    var button = new Button("change");
+//    button.setWidth(70);
+//    button.setHeight(40);
+//    button.setPosition(new Point(500, 0));
+//    gameLoop.addElement(button);
 }
 
 function initialize() {

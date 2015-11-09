@@ -29,8 +29,6 @@ AreaElement.prototype.findColor = function(){
 
 AreaElement.prototype.draw = function(g){
     g.fillStyle = this.findColor();
-    g.rect(this.point.getX(), this.point.getY(),
+    g.fillRect(this.point.getX(), this.point.getY(),
         this.width, this.height);
-    g.fill();
-    g.stroke();
 }
