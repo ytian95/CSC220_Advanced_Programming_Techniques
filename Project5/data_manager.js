@@ -39,10 +39,10 @@ DataManager.prototype.createFakeData = function(){
 //      }
 //  };
 this.data = {
-      names : {
-          0 : "kwh_total_sqft",
-          1 : "therms_total_sqft"
-      },
+      names : [
+          "kwh_total_sqft",
+          "therms_total_sqft"
+      ],
       dataSets : {
           kwh_total_sqft : [
               new DataPiece("Albany Park", 16294),
@@ -123,6 +123,19 @@ DataManager.prototype.getName = function(index){
 //working
 DataManager.prototype.getData = function(index){
     return this.data.dataSets[this.getName(index)];
+}
+
+DataManager.prototype.setElementManager = function(elementManager){
+    this.elementManager = elementManager;
+}
+
+
+DataManager.prototype.changePage = function(){
+    this.elementManager.changePage();
+}
+
+DataManager.prototype.getNumDataSets = function(){
+    return this.data.names.length;
 }
 
 function DataPiece(name, value){

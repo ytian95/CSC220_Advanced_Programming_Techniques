@@ -8,7 +8,7 @@ ElementManager.prototype.draw = function(g){
     //console.log("drawing");
     for(var i = 0; i < this.elements.length; i++){
         if(!(this.elements[i] instanceof AreaGroup)){
-            console.log("is not a areagroup");
+            //console.log("is not a areagroup");
             this.elements[i].draw(g);
         }
         else{
@@ -28,15 +28,15 @@ ElementManager.prototype.isCurrentPage = function(page){
                 === this.elements[page].getName());
 }
 
-ElementManager.prototype.add = function(element){
-    this.elements.push(element);
+ElementManager.prototype.changePage = function(){
+    this.currentPageIndex += 1;
+    if(this.currentPageIndex === this.dataManager.getNumDataSets()){
+        this.currentPageIndex = 0;
+    }
 }
 
-ElementManager.prototype.addElementsFromData = function(){
-//    var currentPageData = this.dataManager.getData(this.currentPageIndex);
-//    for(var i = 0; i < currentPageData.length; i++){
-//        var datum = currentPageData[i];
-//    }
+ElementManager.prototype.add = function(element){
+    this.elements.push(element);
 }
 
 ElementManager.prototype.remove = function(element){

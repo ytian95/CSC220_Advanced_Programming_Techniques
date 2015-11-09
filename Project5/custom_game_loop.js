@@ -7,6 +7,7 @@ CustomGameLoop.prototype.initialize = function(canvas){
     GameLoop.prototype.initialize.call(this, canvas);
     this.dataManager = new DataManager();
     this.elementManager = new ElementManager(this.dataManager);
+    this.dataManager.setElementManager(this.elementManager);
     this.pointerManager = new PointerManager(this.elementManager);
 }
 
@@ -27,8 +28,9 @@ CustomGameLoop.prototype.getName = function(index){
     return(this.dataManager.getName(index));
 }
 
-CustomGameLoop.prototype.test = function(){
-    this.dataManager.test();
+
+CustomGameLoop.prototype.getDataManager = function(){
+    return this.dataManager;
 }
 
 CustomGameLoop.prototype.draw = function(g){
@@ -39,6 +41,7 @@ CustomGameLoop.prototype.draw = function(g){
 }
 
 CustomGameLoop.prototype.onPointerEnter = function(id, position){
+    console.log("onPointerEnter");
     this.pointerManager.onPointerEnter(id, position);
 }
 
@@ -59,3 +62,7 @@ CustomGameLoop.prototype.onPointerDeactivate = function(id, position){
 CustomGameLoop.prototype.onPointerLeave = function(id, position){
     this.pointerManager.onPointerLeave(id, position);
 }
+//
+//CustomGameLoop.prototype.onMouseMove = function(id, position){
+//    console.log("moving mouse");
+//}

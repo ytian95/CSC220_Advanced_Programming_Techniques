@@ -24,6 +24,18 @@ Button.prototype.setText = function(text){
     this.text = text;
 }
 
+Button.prototype.setDataManager = function(dataManager){
+    this.dataManager = dataManager;
+}
+
+Button.prototype.setHovered = function(bool){
+    this.isHovered = bool;
+}
+
+Button.prototype.onClick = function(){
+    this.dataManager.changePage();
+}
+
 Button.prototype.setColor = function(){
     if(this.isHovered){
         this.color = "yellow";

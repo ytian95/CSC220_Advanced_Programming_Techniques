@@ -9,7 +9,8 @@ Pointer.prototype.move = function(position){
     this.position.setX(position.getX());
     this.position.setY(position.getY());
     
-    if(this.hasSelectedElement()){
+    if(this.hasSelectedElement() && 
+            this.element instanceof DraggableElement){
         this.element.move(position);
     }
 }
@@ -40,11 +41,20 @@ Pointer.prototype.hasSelectedElement = function(){
 Pointer.prototype.selectElement = function(element){
     if(element !== null && this.isActive){
         this.element = element;
-        this.element.findOffset(this.position);
+        if(element instanceof DraggableElement){
+            this.element.findOffset(this.position);
+        }
+        else if(element instanceof Button){
+            this.element.setHovered(true);
+            this.element.onClick();
+        }
     }
 }
 
 Pointer.prototype.deselectElement = function(){
+    if(this.element instanceof Button){
+        this.element.setHovered(false);
+    }
     this.element = null;
 }
 
