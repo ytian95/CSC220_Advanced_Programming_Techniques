@@ -17,6 +17,10 @@ ElementManager.prototype.draw = function(g){
     }
 }
 
+ElementManager.prototype.getCurrentDataSetName = function(){
+    return this.elements[this.currentPageIndex].getName();
+}
+
 ElementManager.prototype.isCurrentPage = function(page){
     return(this.dataManager.getName(this.currentPageIndex)
                 === this.elements[page].getName());

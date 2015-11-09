@@ -34,10 +34,18 @@ CustomGameLoop.prototype.getDataManager = function(){
 }
 
 CustomGameLoop.prototype.draw = function(g){
-    //console.log("fill fill");
     g.fillStyle = "lightgray";
     g.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.drawCurrentName(g);
     this.elementManager.draw(g);
+}
+
+CustomGameLoop.prototype.drawCurrentName = function(g){
+    var dataSetName = this.elementManager.getCurrentDataSetName();
+    g.fillStyle = "black";
+    var fontSize = 20;
+    g.font = fontSize + "px Arial"
+    g.fillText(dataSetName, 0, this.canvas.height - fontSize);
 }
 
 CustomGameLoop.prototype.onPointerEnter = function(id, position){

@@ -23,15 +23,12 @@ AreaElement.prototype.setXY = function(){
 }
 
 AreaElement.prototype.findColor = function(){
-    // arr.join(", ")
     var newColor = [];
-    console.log(this.maxRGBColor);
     for(var i = 0; i < this.maxRGBColor.length; i++){
         newColor.push(Math.floor(this.maxRGBColor[i] -
                         this.maxRGBColor[i] * this.percent));
     }
     var rgbStr = "rgb(" + newColor.join(", ") + ")";
-    console.log(rgbStr);
     return rgbStr;
     
 }
