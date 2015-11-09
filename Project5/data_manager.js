@@ -1,48 +1,25 @@
-function DataManager(){
+function DataManager() {
     this.counter = 0;
     this.data = {
-        names : {},
-        dataSets : {}
+        names : { },
+        dataSets : { }
     };
     this.initialize();
     this.createFakeData();
-//    console.log(this.originalData);
 }
 
-DataManager.prototype.initialize = function(){
+DataManager.prototype.initialize = function() {
     this.httpRequest("sqftElecData.json", "kwh_total_sqft");
     this.httpRequest("sqftGasData.json", "therms_total_sqft");
 }
 
-DataManager.prototype.createFakeData = function(){
+DataManager.prototype.createFakeData = function() {
     //Will be using this data until can fix parser
-//    this.data = {
-//      names : {
-//          0 : "kwh_total_sqft",
-//          1 : "therms_total_sqft"
-//      },
-//      dataSets : {
-//          kwh_total_sqft : {
-//              0 : new DataPiece("Albany Park", 16294),
-//              1 : new DataPiece("Archer Heights", 20489),
-//              2 : new DataPiece("Armour Square", 25015),
-//              3 : new DataPiece("Ashburn", 20145),
-//              4 : new DataPiece("Auburn Gresham", 15176)
-//          },
-//          therms_total_sqft : {
-//              0 : new DataPiece("Albany Park", 16103),
-//              1 : new DataPiece("Archer Heights", 24965),
-//              2 : new DataPiece("Armour Square", 24651),
-//              3 : new DataPiece("Ashburn", 20496),
-//              4 : new DataPiece("Auburn Gresham", 14707)
-//          }
-//      }
-//  };
-this.data = {
+    this.data = {
       names : [
           "kwh_total_sqft",
           "therms_total_sqft"
-      ],
+        ],
       dataSets : {
           kwh_total_sqft : [
               new DataPiece("Albany Park", 16294),
@@ -50,23 +27,23 @@ this.data = {
               new DataPiece("Armour Square", 25015),
               new DataPiece("Ashburn", 20145),
               new DataPiece("Auburn Gresham", 15176)
-          ],
+            ],
           therms_total_sqft : [
               new DataPiece("Albany Park", 16103),
               new DataPiece("Archer Heights", 24965),
               new DataPiece("Armour Square", 24651),
               new DataPiece("Ashburn", 20496),
               new DataPiece("Auburn Gresham", 14707)
-          ]
-      }
-  };
+            ]
+        }
+    };
 }
 
-DataManager.prototype.httpRequest = function(fileName, dataName){
+DataManager.prototype.httpRequest = function(fileName, dataName) {
     var thisClass = this;
     var xmlhttp;
     
-    if(window.XMLHttpRequest){
+    if( window.XMLHttpRequest ) {
         xmlhttp = new XMLHttpRequest();
     }
     else{
@@ -75,8 +52,8 @@ DataManager.prototype.httpRequest = function(fileName, dataName){
     xmlhttp.associatedDataPacket = this;
     xmlhttp.open("GET", fileName, true);
     
-    xmlhttp.onreadystatechange = function(){
-        if(xmlhttp.readyState === 4 && xmlhttp.status === 200){
+    xmlhttp.onreadystatechange = function() {
+        if( xmlhttp.readyState === 4 && xmlhttp.status === 200 ) {
             this.originalData = JSON.parse(xmlhttp.responseText);
             thisClass.parseData(this.originalData, dataName);
         }
@@ -89,16 +66,16 @@ DataManager.prototype.httpRequest = function(fileName, dataName){
     xmlhttp.send();
 }
 
-DataManager.prototype.parseData = function(originalData, dataName){
+DataManager.prototype.parseData = function(originalData, dataName) {
     var columns = originalData.meta.view.columns;
     var areaIndex = 0;
     var dataIndex = 0;
     
-    for(var i = 0; i < columns.length; i++){
-        if(columns[i].fieldName === "community_area_name"){
+    for( var i = 0; i < columns.length; i++ ) {
+        if( columns[i].fieldName === "community_area_name" ) {
             areaIndex = i;
         }
-        else if(columns[i].fieldName === dataName){
+        else if( columns[i].fieldName === dataName ) {
             dataIndex = i;
         }
     }
@@ -107,7 +84,7 @@ DataManager.prototype.parseData = function(originalData, dataName){
     this.counter += 1;
     
     this.data.dataSets[dataName] = {};
-    for(var i = 0; i < originalData.data.length; i++){
+    for( var i = 0; i < originalData.data.length; i++ ) {
         var areaName = originalData.data[i][areaIndex];
         var rawData = originalData.data[i][dataIndex];
         var dataPiece = new DataPiece(areaName, rawData);
@@ -116,47 +93,40 @@ DataManager.prototype.parseData = function(originalData, dataName){
 }
 
 //working
-DataManager.prototype.getName = function(index){
+DataManager.prototype.getName = function(index) {
     return this.data.names[index];
 }
 
 //working
-DataManager.prototype.getData = function(index){
-    return this.data.dataSets[this.getName(index)];
+DataManager.prototype.getData = function(index) {
+    return this.data.dataSets[ this.getName(index) ];
 }
 
-DataManager.prototype.setElementManager = function(elementManager){
+DataManager.prototype.setElementManager = function(elementManager) {
     this.elementManager = elementManager;
 }
 
-
-DataManager.prototype.changePage = function(){
+DataManager.prototype.changePage = function() {
     this.elementManager.changePage();
 }
 
-DataManager.prototype.resetDataPosition = function(){
+DataManager.prototype.resetDataPosition = function() {
     this.elementManager.resetDataPosition();
 }
 
-DataManager.prototype.getNumDataSets = function(){
+DataManager.prototype.getNumDataSets = function( ){
     return this.data.names.length;
 }
 
-function DataPiece(name, value){
+function DataPiece(name, value) {
     this.name = name;
     this.value = value;
 }
 
-DataPiece.prototype.getName = function(){
+DataPiece.prototype.getName = function() {
     return this.name;
 }
 
-DataPiece.prototype.getValue = function(){
+DataPiece.prototype.getValue = function() {
     return this.value;
 }
-//
-//function initialize(){
-//    var dm = new DataManager();
-//}
-//
-//window.onload = initialize;

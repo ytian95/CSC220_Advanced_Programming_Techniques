@@ -1,6 +1,6 @@
 function setupTestScenario() {
     var gameLoop = new CustomGameLoop();
-    gameLoop.initialize(document.getElementById("canvas"));
+    gameLoop.initialize( document.getElementById("canvas") );
     gameLoop.setCanvasSize(640, 480);
     
     //trying to figure out the best way to add the AreaElement to the
@@ -9,10 +9,9 @@ function setupTestScenario() {
     addElementsFromData(gameLoop);
 }
 
-function addElementsFromData(gameLoop){
+function addElementsFromData(gameLoop) {
     var data = gameLoop.getData(0);
     var name = gameLoop.getName(0);
-    //console.log(data);
     var areaGroup1 = new AreaGroup();
     areaGroup1.setName(name);
     areaGroup1.addDataPoints(data, [255, 0, 0]);
@@ -20,7 +19,6 @@ function addElementsFromData(gameLoop){
     
     data = gameLoop.getData(1);
     name = gameLoop.getName(1);
-    //console.log(data);
     var areaGroup2 = new AreaGroup();
     areaGroup2.setName(name);
     areaGroup2.addDataPoints(data, [0, 0, 255]);
@@ -45,11 +43,6 @@ function addElementsFromData(gameLoop){
 
 function initialize() {
     setupTestScenario();
-//    var dm = new DataManager();
-//    var data = dm.getData(0);
-//    var ag = new AreaGroup();
-//    ag.addDataPoints(data);
-//    console.log(ag);
 }
 
 window.onload = initialize;

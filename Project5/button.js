@@ -1,25 +1,26 @@
-function Button(){
+function Button() {
     this.isHovered = false;
     this.color = "green";
 }
 Button.prototype = new HitTestableElement();
 
-Button.prototype.setText = function(text){
+Button.prototype.setText = function(text) {
     this.text = text;
 }
 
-Button.prototype.setDataManager = function(dataManager){
+Button.prototype.setDataManager = function(dataManager) {
     this.dataManager = dataManager;
 }
 
-Button.prototype.setHovered = function(bool){
+Button.prototype.setHovered = function(bool) {
     this.isHovered = bool;
 }
 
-Button.prototype.onClick = function(){
+Button.prototype.onClick = function() {
 }
 
-Button.prototype.setColor = function(){
+//change
+Button.prototype.setColor = function() {
     if(this.isHovered){
         this.color = "yellow";
     }
@@ -28,8 +29,7 @@ Button.prototype.setColor = function(){
     }
 }
 
-Button.prototype.draw = function(g){
-    //console.log("button draw");
+Button.prototype.draw = function(g) {
     this.setColor();
     g.fillStyle = this.color;
     g.fillRect(this.point.getX(), this.point.getY(),
@@ -42,20 +42,20 @@ Button.prototype.draw = function(g){
             this.point.getY() + this.height/2);
 }
 
-function ChangeDataSetButton(){
+function ChangeDataSetButton() {
     
 }
 ChangeDataSetButton.prototype = new Button();
 
-ChangeDataSetButton.prototype.onClick = function(){
+ChangeDataSetButton.prototype.onClick = function() {
     this.dataManager.changePage();
 }
 
-function ResetButton(){
+function ResetButton() {
    
 }
 ResetButton.prototype = new Button();
 
-ResetButton.prototype.onClick = function(){
+ResetButton.prototype.onClick = function() {
     this.dataManager.resetDataPosition();
 }
