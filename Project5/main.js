@@ -28,12 +28,21 @@ function addElementsFromData(gameLoop){
     console.log(areaGroup);
     gameLoop.addElement(areaGroup);
     
-    var button = new Button("change");
-    button.setWidth(70);
-    button.setHeight(40);
-    button.setPosition(new Point(500, 0));
-    button.setDataManager(gameLoop.getDataManager());
-    gameLoop.addElement(button);
+    var button1 = new ChangeDataSetButton();
+    button1.setText("change");
+    button1.setWidth(70);
+    button1.setHeight(40);
+    button1.setPosition(new Point(500, 0));
+    button1.setDataManager(gameLoop.getDataManager());
+    gameLoop.addElement(button1);
+    
+    var button2 = new ResetButton();
+    button2.setText("reset");
+    button2.setWidth(70);
+    button2.setHeight(40);
+    button2.setPosition(new Point(500, 60));
+    button2.setDataManager(gameLoop.getDataManager());
+    gameLoop.addElement(button2);
 }
 
 function initialize() {

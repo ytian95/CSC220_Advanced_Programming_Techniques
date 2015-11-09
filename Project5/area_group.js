@@ -75,3 +75,9 @@ AreaGroup.prototype.draw = function(g){
         this.elements[i].draw(g);
     }
 }
+
+AreaGroup.prototype.resetDataPosition = function(){
+    for(var i = 0; i < this.elements.length; i++){
+        this.elements[i].setXY();
+    }
+}

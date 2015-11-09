@@ -134,6 +134,10 @@ DataManager.prototype.changePage = function(){
     this.elementManager.changePage();
 }
 
+DataManager.prototype.resetDataPosition = function(){
+    this.elementManager.resetDataPosition();
+}
+
 DataManager.prototype.getNumDataSets = function(){
     return this.data.names.length;
 }

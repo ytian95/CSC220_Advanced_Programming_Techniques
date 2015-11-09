@@ -5,18 +5,12 @@ function ElementManager(dataManager){
 }
 
 ElementManager.prototype.draw = function(g){
-    //console.log("drawing");
     for(var i = 0; i < this.elements.length; i++){
         if(!(this.elements[i] instanceof AreaGroup)){
-            //console.log("is not a areagroup");
             this.elements[i].draw(g);
         }
         else{
-//            console.log("in the else");
-//            console.log(this.dataManager.getName(this.currentPageIndex));
             if(this.isCurrentPage(i)){
-            
-                //console.log("is a areagroup");
                 this.elements[i].draw(g);
             }
         }
@@ -28,11 +22,17 @@ ElementManager.prototype.isCurrentPage = function(page){
                 === this.elements[page].getName());
 }
 
+//assumes that all the data is added before the buttons
 ElementManager.prototype.changePage = function(){
     this.currentPageIndex += 1;
     if(this.currentPageIndex === this.dataManager.getNumDataSets()){
         this.currentPageIndex = 0;
     }
+}
+
+//currently resets only the current page
+ElementManager.prototype.resetDataPosition = function(){
+    this.elements[this.currentPageIndex].resetDataPosition();
 }
 
 ElementManager.prototype.add = function(element){
