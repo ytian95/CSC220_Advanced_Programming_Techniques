@@ -9,8 +9,10 @@ function DataManager() {
 }
 
 DataManager.prototype.initialize = function() {
-    this.httpRequest("sqftElecData.json", "kwh_total_sqft");
-    this.httpRequest("sqftGasData.json", "therms_total_sqft");
+    this.httpRequest("Data/sqftElecData.json", "kwh_total_sqft");
+    this.httpRequest("Data/sqftGasData.json", "therms_total_sqft");
+    console.log(this.originalData);
+    console.log(this.data);
 }
 
 DataManager.prototype.createFakeData = function() {
@@ -54,8 +56,10 @@ DataManager.prototype.httpRequest = function(fileName, dataName) {
     
     xmlhttp.onreadystatechange = function() {
         if( xmlhttp.readyState === 4 && xmlhttp.status === 200 ) {
-            this.originalData = JSON.parse(xmlhttp.responseText);
-            thisClass.parseData(this.originalData, dataName);
+            //onDataRecieved()
+            //method for isDataLoaded
+            thisClass.originalData = JSON.parse(xmlhttp.responseText);
+            thisClass.parseData(thisClass.originalData, dataName);
         }
         //console.log(this.originalData);
     }
