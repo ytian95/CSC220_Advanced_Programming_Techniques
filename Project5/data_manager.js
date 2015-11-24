@@ -1,19 +1,136 @@
+//will now monitor datasets
 function DataManager() {
     this.counter = 0;
     this.data = {
         names : { },
-        dataSets : { }
+        datasets : {}
     };
+    this.resources = [];
+    //this.buffered = [];
     this.initialize();
-    this.createFakeData();
+    //this.createFakeData();
 }
 
 DataManager.prototype.initialize = function() {
-    this.httpRequest("Data/sqftElecData.json", "kwh_total_sqft");
-    this.httpRequest("Data/sqftGasData.json", "therms_total_sqft");
-    console.log(this.originalData);
-    console.log(this.data);
+    var resource1 = new Resource("Data/sqftElecData.json");
+    resource1.datasetName = "kwh_total_sqft";
+    
+    var resource2 = new Resource("Data/sqftGasData.json");
+    resource2.datasetName = "therms_total_sqft";
+    
+    for(var i = 0; i < this.resources.length; i++){
+        this.resources[i][1].beginLoad(this, this.onLoaded, null);
+    }
 }
+
+DataManager.prototype.onLoaded = function(resource){
+    var dataName = resource.datasetName;
+    this.data.names[this.counter] = dataName;
+    var dataset = new Dataset(dataName);
+    dataset.onLoaded(resource);
+    this.data.datasets[dataName] = dataset;
+    this.counter += 1;
+    
+    if(this.isAllLoaded()){
+        //propogate back up to custom game loop
+        //this.elementManager.initializeData();
+    }
+}
+
+DataManager.prototype.isAllLoaded = function(){
+    //console.log(this.data);
+    for(var i = 0; i < this.resources.length; i++){
+        if(!this.resources[i].isLoaded()){
+            //console.log("not finished loadeg");
+            return false;
+        }
+    }
+    //console.log("finished liading");
+    return true;
+}
+
+//working
+DataManager.prototype.getName = function(index) {
+    return this.data.names[index];
+}
+
+//working. returns a Dataset
+DataManager.prototype.getData = function(index) {
+    return this.data.datasets[this.getName(index)];
+}
+
+DataManager.prototype.setElementManager = function(elementManager) {
+    this.elementManager = elementManager;
+}
+
+//edit so buton now has instance of elementManager
+DataManager.prototype.changePage = function() {
+    this.elementManager.changePage();
+}
+
+DataManager.prototype.resetDataPosition = function() {
+    this.elementManager.resetDataPosition();
+}
+
+DataManager.prototype.getNumDataSets = function( ){
+    return this.data.names.length;
+}
+
+//DataManager.prototype.httpRequest = function(fileName, dataName) {
+//    var thisClass = this;
+//    var xmlhttp;
+//    
+//    if( window.XMLHttpRequest ) {
+//        xmlhttp = new XMLHttpRequest();
+//    }
+//    else{
+//        xmlhttp =  new ActiveXObject("Microsoft.XMLHTTP");
+//    }
+//    xmlhttp.associatedDataPacket = this;
+//    xmlhttp.open("GET", fileName, true);
+//    
+//    xmlhttp.onreadystatechange = function() {
+//        if( xmlhttp.readyState === 4 && xmlhttp.status === 200 ) {
+//            //onDataRecieved()
+//            //method for isDataLoaded
+//            thisClass.originalData = JSON.parse(xmlhttp.responseText);
+//            thisClass.parseData(thisClass.originalData, dataName);
+//            this.buffered = true;
+//        }
+//        //console.log(this.originalData);
+//    }
+//    //the problem is that the onreadystatechange gets called independent of
+//    //the httpRequest function. Thus, unknown if have access when another
+//    //function is called. Also may have something to do with local variables
+//    //not being available after a function call.
+//    xmlhttp.send();
+//}
+//
+//DataManager.prototype.parseData = function(originalData, dataName) {
+//    var columns = originalData.meta.view.columns;
+//    var areaIndex = 0;
+//    var dataIndex = 0;
+//    
+//    for( var i = 0; i < columns.length; i++ ) {
+//        if( columns[i].fieldName === "community_area_name" ) {
+//            areaIndex = i;
+//        }
+//        else if( columns[i].fieldName === dataName ) {
+//            dataIndex = i;
+//        }
+//    }
+//    
+//    this.data.names[this.counter] = dataName;
+//    this.counter += 1;
+//    
+//    this.data.dataSets[dataName] = {};
+//    for( var i = 0; i < originalData.data.length; i++ ) {
+//        var areaName = originalData.data[i][areaIndex];
+//        var rawData = originalData.data[i][dataIndex];
+//        var dataPiece = new DataPiece(areaName, rawData);
+//        this.data.dataSets[dataName][i] = dataPiece;
+//    }
+//}
 
 DataManager.prototype.createFakeData = function() {
     //Will be using this data until can fix parser
@@ -22,7 +139,7 @@ DataManager.prototype.createFakeData = function() {
           "kwh_total_sqft",
           "therms_total_sqft"
         ],
-      dataSets : {
+      datasets : {
           kwh_total_sqft : [
               new DataPiece("Albany Park", 16294),
               new DataPiece("Archer Heights", 20489),
@@ -39,98 +156,4 @@ DataManager.prototype.createFakeData = function() {
             ]
         }
     };
-}
-
-DataManager.prototype.httpRequest = function(fileName, dataName) {
-    var thisClass = this;
-    var xmlhttp;
-    
-    if( window.XMLHttpRequest ) {
-        xmlhttp = new XMLHttpRequest();
-    }
-    else{
-        xmlhttp =  new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.associatedDataPacket = this;
-    xmlhttp.open("GET", fileName, true);
-    
-    xmlhttp.onreadystatechange = function() {
-        if( xmlhttp.readyState === 4 && xmlhttp.status === 200 ) {
-            //onDataRecieved()
-            //method for isDataLoaded
-            thisClass.originalData = JSON.parse(xmlhttp.responseText);
-            thisClass.parseData(thisClass.originalData, dataName);
-        }
-        //console.log(this.originalData);
-    }
-    //the problem is that the onreadystatechange gets called independent of
-    //the httpRequest function. Thus, unknown if have access when another
-    //function is called. Also may have something to do with local variables
-    //not being available after a function call.
-    xmlhttp.send();
-}
-
-DataManager.prototype.parseData = function(originalData, dataName) {
-    var columns = originalData.meta.view.columns;
-    var areaIndex = 0;
-    var dataIndex = 0;
-    
-    for( var i = 0; i < columns.length; i++ ) {
-        if( columns[i].fieldName === "community_area_name" ) {
-            areaIndex = i;
-        }
-        else if( columns[i].fieldName === dataName ) {
-            dataIndex = i;
-        }
-    }
-    
-    this.data.names[this.counter] = dataName;
-    this.counter += 1;
-    
-    this.data.dataSets[dataName] = {};
-    for( var i = 0; i < originalData.data.length; i++ ) {
-        var areaName = originalData.data[i][areaIndex];
-        var rawData = originalData.data[i][dataIndex];
-        var dataPiece = new DataPiece(areaName, rawData);
-        this.data.dataSets[dataName][i] = dataPiece;
-    }
-}
-
-//working
-DataManager.prototype.getName = function(index) {
-    return this.data.names[index];
-}
-
-//working
-DataManager.prototype.getData = function(index) {
-    return this.data.dataSets[ this.getName(index) ];
-}
-
-DataManager.prototype.setElementManager = function(elementManager) {
-    this.elementManager = elementManager;
-}
-
-DataManager.prototype.changePage = function() {
-    this.elementManager.changePage();
-}
-
-DataManager.prototype.resetDataPosition = function() {
-    this.elementManager.resetDataPosition();
-}
-
-DataManager.prototype.getNumDataSets = function( ){
-    return this.data.names.length;
-}
-
-function DataPiece(name, value) {
-    this.name = name;
-    this.value = value;
-}
-
-DataPiece.prototype.getName = function() {
-    return this.name;
-}
-
-DataPiece.prototype.getValue = function() {
-    return this.value;
 }

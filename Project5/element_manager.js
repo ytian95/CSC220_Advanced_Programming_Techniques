@@ -4,6 +4,10 @@ function ElementManager(dataManager) {
     this.currentPageIndex = 0;
 }
 
+ElementManager.prototype.initializeData = function(){
+    
+}
+
 ElementManager.prototype.draw = function(g) {
     for( var i = 0; i < this.elements.length; i++ ) {
         if( !(this.elements[i] instanceof AreaGroup) ) {

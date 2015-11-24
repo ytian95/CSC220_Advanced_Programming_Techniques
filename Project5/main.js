@@ -43,6 +43,8 @@ function addElementsFromData(gameLoop) {
 
 function initialize() {
     setupTestScenario();
+   // var dm = new DataManager();
+
 }
 
 window.onload = initialize;

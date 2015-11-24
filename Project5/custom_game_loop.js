@@ -28,7 +28,6 @@ CustomGameLoop.prototype.getName = function(index) {
     return( this.dataManager.getName(index) );
 }
 
-
 CustomGameLoop.prototype.getDataManager = function() {
     return this.dataManager;
 }
@@ -36,8 +35,10 @@ CustomGameLoop.prototype.getDataManager = function() {
 CustomGameLoop.prototype.draw = function(g) {
     g.fillStyle = "lightgray";
     g.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.drawCurrentName(g);
-    this.elementManager.draw(g);
+    if(this.dataManager.isAllLoaded()){
+        this.drawCurrentName(g);
+        this.elementManager.draw(g);
+    }
 }
 
 CustomGameLoop.prototype.drawCurrentName = function(g) {
@@ -47,6 +48,8 @@ CustomGameLoop.prototype.drawCurrentName = function(g) {
     g.font = fontSize + "px Arial"
     g.fillText(dataSetName, 0, this.canvas.height - fontSize);
 }
+
+
 
 CustomGameLoop.prototype.onPointerEnter = function(id, position) {
     this.pointerManager.onPointerEnter(id, position);
