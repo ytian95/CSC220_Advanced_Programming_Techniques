@@ -39,20 +39,19 @@ Pointer.prototype.hasSelectedElement = function() {
 }
 
 Pointer.prototype.selectElement = function(element) {
-    if(element !== null && this.isActive) {
-        this.element = element;
-        if( element instanceof DraggableElement ) {
-            this.element.findOffset(this.position);
-        }
-        else if( element instanceof Button ) {
-            this.element.setHovered(true);
-            this.element.onClick();
-        }
-    }
-    else if(element !== null){
+    if(element !== null){
         this.element = element;
         if(element instanceof AreaElement){
             this.element.setActive();
+        }
+        if(this.isActive) {
+            if( element instanceof DraggableElement ) {
+                this.element.findOffset(this.position);
+            }
+            else if( element instanceof Button ) {
+                this.element.setHovered(true);
+                this.element.onClick();
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ ElementManager.prototype.initializeData = function(numDataSets){
     button2.setParent(this);
     this.add(button2);
     
-    console.log(this.elements);
+    //console.log(this.elements);
 }
 
 ElementManager.prototype.draw = function(g) {
