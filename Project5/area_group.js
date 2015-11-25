@@ -12,6 +12,10 @@ AreaGroup.prototype.getName = function() {
     return this.name;
 }
 
+AreaGroup.prototype.setBlockSize = function(block){
+    this.blockSize = block;
+}
+
 AreaGroup.prototype.setMaxColumns = function(maxCols) {
     this.maxColumns = maxCols;
 }
@@ -30,10 +34,10 @@ AreaGroup.prototype.findMaxData = function(dataSet) {
 AreaGroup.prototype.addDataPoints = function(dataSet, RGBcolor) {
     var maxValue = this.findMaxData(dataSet);
     console.log(maxValue);
+    maxValue = 50000;
     for( var i = 0; i < dataSet.size(); i++ ) {
         var dataPiece = dataSet.at(i);
         var areaElem = new AreaElement();
-        console.log(dataPiece.getValue());
         console.log(dataPiece.getValue()/maxValue);
         var areaData = AREA_LOCS[dataPiece.getName()];
         //console.log(areaData);

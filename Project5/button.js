@@ -8,8 +8,8 @@ Button.prototype.setText = function(text) {
     this.text = text;
 }
 
-Button.prototype.setDataManager = function(dataManager) {
-    this.dataManager = dataManager;
+Button.prototype.setParent = function(parent) {
+    this.parent = parent;
 }
 
 Button.prototype.setHovered = function(bool) {
@@ -48,7 +48,7 @@ function ChangeDataSetButton() {
 ChangeDataSetButton.prototype = new Button();
 
 ChangeDataSetButton.prototype.onClick = function() {
-    this.dataManager.changePage();
+    this.parent.changePage();
 }
 
 function ResetButton() {
@@ -57,5 +57,5 @@ function ResetButton() {
 ResetButton.prototype = new Button();
 
 ResetButton.prototype.onClick = function() {
-    this.dataManager.resetDataPosition();
+    this.parent.resetDataPosition();
 }

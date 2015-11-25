@@ -49,11 +49,20 @@ Pointer.prototype.selectElement = function(element) {
             this.element.onClick();
         }
     }
+    else if(element !== null){
+        this.element = element;
+        if(element instanceof AreaElement){
+            this.element.setActive();
+        }
+    }
 }
 
 Pointer.prototype.deselectElement = function() {
     if( this.element instanceof Button ) {
         this.element.setHovered(false);
+    }
+    else if(this.element instanceof AreaElement){
+        this.element.setDeactive();
     }
     this.element = null;
 }

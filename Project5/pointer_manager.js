@@ -25,6 +25,11 @@ PointerManager.prototype.onPointerEnter = function(id, position) {
 
 PointerManager.prototype.onPointerMove = function(id, position) {
     this.movePointer(id, position);
+    //this.unsetElementToPointer(id, position);
+    if(!this.pointers[id].getIsActive()){
+        this.setElementToPointer(id, position);
+    }
+    
 }
 
 PointerManager.prototype.onPointerActivate = function(id, position) {
@@ -42,6 +47,7 @@ PointerManager.prototype.onPointerLeave = function(id, position) {
 }
 
 PointerManager.prototype.setElementToPointer = function(id, position) {
+        this.unsetElementToPointer(id);
         var element = this.elementManager.hitTest(position);
         this.pointers[id].selectElement(element);
 }
