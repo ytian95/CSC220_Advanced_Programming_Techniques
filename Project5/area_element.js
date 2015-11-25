@@ -17,8 +17,8 @@ AreaElement.prototype.setPercent = function(percent) {
 }
 
 AreaElement.prototype.setXY = function() {
-    this.setPosition( new Point(this.xArray * this.width, 
-                                this.yArray * this.height) );
+    this.setPosition( new Point(this.xArray * this.blockSize, 
+                                this.yArray * this.blockSize) );
 }
 
 AreaElement.prototype.findColor = function() {

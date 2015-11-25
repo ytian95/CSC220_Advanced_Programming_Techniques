@@ -1,6 +1,6 @@
 function AreaGroup() {
     this.elements = [ ];
-    this.maxColumns = 2;
+    this.blockSize = 25;
 }
 
 AreaGroup.prototype.setName = function(name) {
@@ -28,32 +28,26 @@ AreaGroup.prototype.findMaxData = function(dataSet) {
 }
 
 AreaGroup.prototype.addDataPoints = function(dataSet, RGBcolor) {
-    var cols = 0;
-    var rows = 0;
     var maxValue = this.findMaxData(dataSet);
+    console.log(maxValue);
     for( var i = 0; i < dataSet.size(); i++ ) {
         var dataPiece = dataSet.at(i);
         var areaElem = new AreaElement();
-        console.log(dataPiece.getName());
+        console.log(dataPiece.getValue());
+        console.log(dataPiece.getValue()/maxValue);
         var areaData = AREA_LOCS[dataPiece.getName()];
-        console.log(areaData);
+        //console.log(areaData);
         areaElem.setXArray(areaData[0]); //fix
         areaElem.setYArray(areaData[1]); //fix
-        areaElem.setWidth(40 * areaData[2]);
-        areaElem.setHeight(40 * areaData[3]);
+        areaElem.setWidth(this.blockSize * areaData[2]);
+        areaElem.setHeight(this.blockSize * areaData[3]);
+        areaElem.setBlockSize(this.blockSize);
         areaElem.setXY();
         areaElem.addData(dataPiece);
         areaElem.setPercent( dataPiece.getValue()/maxValue );
         areaElem.setMaxRGBColor(RGBcolor);
 
         this.elements.push(areaElem);
-        if( cols === this.maxColumns ) {
-            cols = 0;
-            rows += 1;
-        }
-        else{
-            cols += 1;
-        }
     }
 }
 

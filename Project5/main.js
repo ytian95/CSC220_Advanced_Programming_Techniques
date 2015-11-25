@@ -1,7 +1,7 @@
 function setupTestScenario() {
     var gameLoop = new CustomGameLoop();
     gameLoop.initialize( document.getElementById("canvas") );
-    gameLoop.setCanvasSize(1300, 1500);
+    gameLoop.setCanvasSize(800, 1000);
     
     //trying to figure out the best way to add the AreaElement to the
     //ElementManager because I don't feel that the ElementManager should

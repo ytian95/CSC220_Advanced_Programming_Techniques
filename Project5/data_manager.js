@@ -1,7 +1,7 @@
 //will now monitor datasets
 function DataManager(elementManager) {
     this.elementManager = elementManager;
-    console.log(this.elementManager);
+    //console.log(this.elementManager);
     this.counter = 0;
     this.data = {
         names : { },
@@ -76,7 +76,7 @@ DataManager.prototype.resetDataPosition = function() {
 }
 
 DataManager.prototype.getNumDataSets = function( ){
-    return this.data.names.length;
+    return this.counter;
 }
 
 //DataManager.prototype.httpRequest = function(fileName, dataName) {
