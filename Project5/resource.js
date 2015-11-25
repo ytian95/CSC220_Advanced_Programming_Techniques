@@ -34,12 +34,12 @@ Resource.prototype.beginLoad = function(
     var request = new XMLHttpRequest();
     this.request = request;
     
-    //console.log("request gotten");
+    console.log("request gotten");
     
     this.request.onreadystatechange = function() {
         if (request.readyState == 4) {
             if (request.status == 200) {
-                //console.log("data has been loaded");
+                console.log("data has been loaded");
                 _this.callLoadHandler();
             } else {
                 _this.callErrorHandler();

@@ -5,9 +5,10 @@ CustomGameLoop.prototype = new GameLoop();
 
 CustomGameLoop.prototype.initialize = function(canvas) {
     GameLoop.prototype.initialize.call(this, canvas);
-    this.dataManager = new DataManager();
-    this.elementManager = new ElementManager(this.dataManager);
-    this.dataManager.setElementManager(this.elementManager);
+    this.elementManager = new ElementManager();
+    this.dataManager = new DataManager(this.elementManager);
+
+    this.elementManager.setDataManager(this.dataManager);
     this.pointerManager = new PointerManager(this.elementManager);
 }
 

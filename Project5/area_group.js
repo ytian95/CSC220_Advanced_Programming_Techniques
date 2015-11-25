@@ -17,9 +17,9 @@ AreaGroup.prototype.setMaxColumns = function(maxCols) {
 }
 
 AreaGroup.prototype.findMaxData = function(dataSet) {
-    var max = dataSet[0].getValue();
-    for( var i = 1; i < dataSet.length; i++ ) {
-        var curr = dataSet[i].getValue();
+    var max = dataSet.at(0).getValue();
+    for( var i = 1; i < dataSet.size(); i++ ) {
+        var curr = dataSet.at(i).getValue();
         if( max < curr ) {
             max  = curr;
         }
@@ -31,14 +31,16 @@ AreaGroup.prototype.addDataPoints = function(dataSet, RGBcolor) {
     var cols = 0;
     var rows = 0;
     var maxValue = this.findMaxData(dataSet);
-    for( var i = 0; i < dataSet.length; i++ ) {
-        var dataPiece = dataSet[i];
+    for( var i = 0; i < dataSet.size(); i++ ) {
+        var dataPiece = dataSet.at(i);
         var areaElem = new AreaElement();
-        
-        areaElem.setXArray(cols);
-        areaElem.setYArray(rows);
-        areaElem.setWidth(50);
-        areaElem.setHeight(50);
+        console.log(dataPiece.getName());
+        var areaData = AREA_LOCS[dataPiece.getName()];
+        console.log(areaData);
+        areaElem.setXArray(areaData[0]); //fix
+        areaElem.setYArray(areaData[1]); //fix
+        areaElem.setWidth(40 * areaData[2]);
+        areaElem.setHeight(40 * areaData[3]);
         areaElem.setXY();
         areaElem.addData(dataPiece);
         areaElem.setPercent( dataPiece.getValue()/maxValue );

@@ -1,11 +1,41 @@
-function ElementManager(dataManager) {
+function ElementManager() {
+    console.log("elem mamager created");
     this.elements = [ ];
-    this.dataManager = dataManager;
     this.currentPageIndex = 0;
+    this.colorsList = [[255, 0, 0], [0, 0, 255]];
 }
 
-ElementManager.prototype.initializeData = function(){
+ElementManager.prototype.setDataManager = function(dataManager){
+    this.dataManager = dataManager;
+}
+
+ElementManager.prototype.initializeData = function(numDataSets){
+    for(var i = 0; i < numDataSets; i++){
+        var data = this.dataManager.getData(i);
+        var name = this.dataManager.getName(i);
+        var areaGroup = new AreaGroup();
+        areaGroup.setName(name);
+        areaGroup.addDataPoints(data, this.colorsList[i]); //dataset passed in
+        this.elements.push(areaGroup);
+    }
     
+    var button1 = new ChangeDataSetButton();
+    button1.setText("change");
+    button1.setWidth(70);
+    button1.setHeight(40);
+    button1.setPosition(new Point(1400, 0));
+    button1.setDataManager(this.dataManager);
+    this.add(button1);
+    
+    var button2 = new ResetButton();
+    button2.setText("reset");
+    button2.setWidth(70);
+    button2.setHeight(40);
+    button2.setPosition(new Point(1400, 60));
+    button2.setDataManager(this.dataManager);
+    this.add(button2);
+    
+    console.log(this.elements);
 }
 
 ElementManager.prototype.draw = function(g) {
