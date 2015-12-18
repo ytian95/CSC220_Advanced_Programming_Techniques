@@ -63,7 +63,11 @@ AreaGroup.prototype.hitTestAndFind = function(position) {
     for( var i = this.elements.length - 1; i >= 0; i-- ) {
         //only going to contain classes instance of HitTestable
         if( this.elements[i].hitTest(position) ) {
-            return this.elements[i];
+            //move it to the bottom of the list
+            var hittested = this.elements[i];
+            this.elements.splice(i, 1);
+            this.elements.push(hittested);
+            return hittested;
         }
     }
     return null;

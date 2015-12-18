@@ -7,7 +7,6 @@ CustomGameLoop.prototype.initialize = function(canvas) {
     GameLoop.prototype.initialize.call(this, canvas);
     this.elementManager = new ElementManager();
     this.dataManager = new DataManager(this.elementManager);
-    console.log("data manager has been created");
     this.elementManager.setDataManager(this.dataManager);
     this.pointerManager = new PointerManager(this.elementManager);
     
@@ -25,7 +24,6 @@ CustomGameLoop.prototype.initialize = function(canvas) {
 }   
 
 CustomGameLoop.prototype.onWindowResize = function(){
-    console.log("resizing!");
     this.resizeCanvas();
 }
 
@@ -35,7 +33,6 @@ CustomGameLoop.prototype.resizeCanvas = function(){
     this.canvas.height = window.innerHeight * this.devicePixelRatio;
     this.canvas.style.width = window.innerWidth + "px";
     this.canvas.style.height = window.innerHeight + "px";
-    console.log("Inside resizeCanvas");
     this.elementManager.resizeCanvas(this.canvas.width, this.canvas.height);
 }
 

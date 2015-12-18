@@ -35,7 +35,9 @@ ElementManager.prototype.initializeData = function(numDataSets) {
     button2.setParent(this);
     this.add(button2);
     
-    this.resizeCanvas(window.innerWidth, window.innerHeight);
+    console.log("resizing initial chicoage");
+    this.resizeCanvas(window.innerWidth*window.devicePixelRatio, 
+        window.innerHeight*window.devicePixelRatio);
 }
 
 ElementManager.prototype.draw = function(g) {

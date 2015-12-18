@@ -27,7 +27,6 @@ AreaElement.prototype.setPercent = function(percent) {
 
 AreaElement.prototype.setBlockSize = function(block) {
     ColorBlock.prototype.setBlockSize.call(this, block);
-    console.log("Area element ok");
     this.updateBlockSpacing();
 }
 
@@ -61,28 +60,43 @@ AreaElement.prototype.findColor = function() {
 AreaElement.prototype.draw = function(g) {
     var colorPercent = this.findColor();
     g.fillStyle = colorPercent;
-    g.fillRect(this.point.getX(), this.point.getY(),
+    g.strokeStyle = "black";
+    g.lineWidth = 1;
+    g.beginPath();
+    g.rect(this.point.getX(), this.point.getY(),
         this.widthRatio * this.blockSize, this.heightRatio * this.blockSize);
-        
+    g.fill();
+    g.stroke();
+    
     if(this.active) {
-        var fontSize = 11;
-        g.font = fontSize + "px Arial";
-        var textName = this.data.getName();
-        var textValue = parseFloat(this.data.getValue()).toFixed();
-        var longestW = this.findLongestStringLength(g.measureText(textName),
-            g.measureText(textValue));
-            
-        g.fillStyle = "white";
-        g.fillRect(this.point.getX()+ this.width, this.point.getY(),
-            Math.floor(longestW), fontSize * 2.5);
-        g.fillStyle = "black";
-        
-        g.fillText(textName, this.point.getX() + this.width,
-            this.point.getY() + fontSize);
-        g.fillText(textValue, this.point.getX() + this.width,
-            this.point.getY() + fontSize * 2);
+        this.drawText(g);
     }
     g.fillStyle = colorPercent;
+}
+
+AreaElement.prototype.drawText = function(g){
+    g.strokeStyle = "black";
+    g.lineWidth = 1;
+    
+    var fontSize = 11;
+    g.font = fontSize + "px Arial";
+    var textName = this.data.getName();
+    var textValue = parseFloat(this.data.getValue()).toFixed();
+    var longestW = this.findLongestStringLength(g.measureText(textName),
+        g.measureText(textValue));
+
+    g.fillStyle = "white";
+    g.beginPath();
+    g.rect(this.point.getX()+ this.width, this.point.getY(),
+        Math.floor(longestW), fontSize * 2.5);
+    g.fill();
+    g.stroke();
+    
+    g.fillStyle = "black";
+    g.fillText(textName, this.point.getX() + this.width,
+        this.point.getY() + fontSize);
+    g.fillText(textValue, this.point.getX() + this.width,
+        this.point.getY() + fontSize * 2);
 }
 
 AreaElement.prototype.findLongestStringLength = function(m1, m2) {
