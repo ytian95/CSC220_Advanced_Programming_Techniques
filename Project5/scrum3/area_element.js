@@ -25,6 +25,18 @@ AreaElement.prototype.setPercent = function(percent) {
     this.percent = percent;
 }
 
+AreaElement.prototype.setBlockSize = function(block) {
+    ColorBlock.prototype.setBlockSize.call(this, block);
+    console.log("Area element ok");
+    this.updateBlockSpacing();
+}
+
+AreaElement.prototype.updateBlockSpacing = function(){
+    this.setXY();
+    this.width = this.widthRatio * this.blockSize;
+    this.height = this.heightRatio * this.blockSize;
+}
+
 AreaElement.prototype.setXY = function() {
     this.setPosition( new Point(this.xArray * this.blockSize, 
                                 this.yArray * this.blockSize) );
@@ -50,7 +62,7 @@ AreaElement.prototype.draw = function(g) {
     var colorPercent = this.findColor();
     g.fillStyle = colorPercent;
     g.fillRect(this.point.getX(), this.point.getY(),
-        this.width * this.blockSize, this.height * this.blockSize);
+        this.widthRatio * this.blockSize, this.heightRatio * this.blockSize);
         
     if(this.active) {
         var fontSize = 11;

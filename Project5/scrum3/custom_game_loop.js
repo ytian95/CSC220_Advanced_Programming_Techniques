@@ -7,6 +7,7 @@ CustomGameLoop.prototype.initialize = function(canvas) {
     GameLoop.prototype.initialize.call(this, canvas);
     this.elementManager = new ElementManager();
     this.dataManager = new DataManager(this.elementManager);
+    console.log("data manager has been created");
     this.elementManager.setDataManager(this.dataManager);
     this.pointerManager = new PointerManager(this.elementManager);
     
@@ -34,9 +35,8 @@ CustomGameLoop.prototype.resizeCanvas = function(){
     this.canvas.height = window.innerHeight * this.devicePixelRatio;
     this.canvas.style.width = window.innerWidth + "px";
     this.canvas.style.height = window.innerHeight + "px";
-    if(this.dataManager.isAllLoaded()){
-        this.elementManager.resizeCanvas(this.canvas.width, this.canvas.height);
-    }
+    console.log("Inside resizeCanvas");
+    this.elementManager.resizeCanvas(this.canvas.width, this.canvas.height);
 }
 
 CustomGameLoop.prototype.setCanvasSize = function(width, height) {
@@ -64,6 +64,7 @@ CustomGameLoop.prototype.draw = function(g) {
     g.fillStyle = "lightgray";
     //g.fillRect(0, 0, this.canvas.width, this.canvas.height);
     g.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    
     if(this.dataManager.isAllLoaded()){
         this.drawCurrentName(g);
         this.elementManager.draw(g);
