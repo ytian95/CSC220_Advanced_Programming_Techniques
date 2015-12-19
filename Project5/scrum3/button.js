@@ -19,6 +19,15 @@ Button.prototype.setHovered = function(bool) {
 Button.prototype.onClick = function() {
 }
 
+Button.prototype.activate = function(position){
+    this.setHovered(true);
+    this.onClick();
+}
+
+Button.prototype.deactivate = function(){
+    this.setHovered(false)
+}
+
 Button.prototype.setColor = function() {
     if(this.isHovered){
         this.color = "yellow";
@@ -42,7 +51,6 @@ Button.prototype.draw = function(g) {
 }
 
 Button.prototype.resizeCanvas = function(width, height){
-    console.log("generic button");
 }
 
 function ChangeDataSetButton() {
@@ -54,8 +62,12 @@ ChangeDataSetButton.prototype.onClick = function() {
     this.parent.changePage();
 }
 
+ChangeDataSetButton.prototype.activate = function(position){
+    Button.prototype.activate.call(this, position);
+    this.onClick();
+}
+
 ChangeDataSetButton.prototype.resizeCanvas = function(width, height){
-    console.log("ChangeDataButon");
     Button.prototype.resizeCanvas.call(this, width, height);
     this.setPosition(new Point(width - this.width, this.point.getY()));
 }
@@ -69,8 +81,12 @@ ResetButton.prototype.onClick = function() {
     this.parent.resetDataPosition();
 }
 
+ResetButton.prototype.activate = function(position){
+    Button.prototype.activate.call(this, position);
+    this.onClick();
+}
+
 ResetButton.prototype.resizeCanvas = function(width, height){
-    console.log("ResetButon");
     Button.prototype.resizeCanvas.call(this, width, height);
     this.setPosition(new Point(width - this.width, this.point.getY()));
 }

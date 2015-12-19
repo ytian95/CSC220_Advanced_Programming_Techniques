@@ -54,7 +54,6 @@ ElementManager.prototype.draw = function(g) {
 ElementManager.prototype.resizeCanvas = function(width, height){
     for(var i = 0; i < this.elements.length; i++){
         this.elements[i].resizeCanvas(width, height);
-        console.log(this.elements[i].resizeCanvas);
     }
 }
 

@@ -13,6 +13,16 @@ AreaElement.prototype.setDeactive = function() {
     this.active = false;
 }
 
+AreaElement.prototype.activate = function(position){
+    DraggableElement.prototype.activate.call(this, position);
+    this.setActive();
+}
+
+AreaElement.prototype.deactivate = function(){
+    DraggableElement.prototype.deactivate.call(this);
+    this.setDeactive();
+}
+
 AreaElement.prototype.addData = function(dataPiece) {
     this.data = dataPiece;
 }

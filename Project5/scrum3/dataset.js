@@ -2,6 +2,8 @@ function Dataset(dataName) {
     this.datasetName = dataName;
     this.data = [];
     this.loaded = false;
+    this.maxValue;
+    this.minValue;
 }
 
 Dataset.prototype.size = function() {
@@ -25,6 +27,9 @@ Dataset.prototype.getName = function() {
 }
 
 Dataset.prototype.parseData = function(originalData, dataName) {
+    this.maxValue = originalData.meta.view.columns[9].cachedContents.largest;
+    this.minValue = originalData.meta.view.columns[9].cachedContents.smalest;
+    
     var columns = originalData.meta.view.columns;
     var areaIndex = 0;
     var dataIndex = 0;
@@ -41,7 +46,7 @@ Dataset.prototype.parseData = function(originalData, dataName) {
     for(var i = 0; i < originalData.data.length; i++){
         var areaName = originalData.data[i][areaIndex];
         var rawData = originalData.data[i][dataIndex];
-        var dataPiece = new DataPiece(areaName, rawData);
+        var dataPiece = new DataPiece(areaName, parseFloat(rawData));
         this.addData(dataPiece);
     }
 }

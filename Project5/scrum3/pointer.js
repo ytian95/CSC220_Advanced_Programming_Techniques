@@ -41,27 +41,15 @@ Pointer.prototype.hasSelectedElement = function() {
 Pointer.prototype.selectElement = function(element) {
     if(element !== null) {
         this.element = element;
-        if(element instanceof AreaElement) {
-            this.element.setActive();
-        }
         if(this.isActive) {
-            if(element instanceof DraggableElement) {
-                this.element.findOffset(this.position);
-            }
-            else if(element instanceof Button) {
-                this.element.setHovered(true);
-                this.element.onClick();
-            }
+            this.element.activate(this.position);
         }
     }
 }
 
 Pointer.prototype.deselectElement = function() {
-    if(this.element instanceof Button) {
-        this.element.setHovered(false);
-    }
-    else if(this.element instanceof AreaElement) {
-        this.element.setDeactive();
+    if(this.element !== null){
+        this.element.deactivate();
     }
     this.element = null;
 }

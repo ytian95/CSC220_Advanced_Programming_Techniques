@@ -36,15 +36,11 @@ AreaGroup.prototype.findMaxData = function(dataSet) {
 
 AreaGroup.prototype.addDataPoints = function(dataSet, RGBcolor) {
     var maxValue = this.findMaxData(dataSet);
-    //console.log(maxValue);
-    maxValue = 50000;
     for( var i = 0; i < dataSet.size(); i++ ) {
         var dataPiece = dataSet.at(i);
         var areaElem = new AreaElement();
         //console.log(dataPiece.getValue()/maxValue);
         var areaData = AREA_LOCS[dataPiece.getName()];
-        //??????????????????????????????
-        //fix colorblock, areaelement
         areaElem.setXArray(areaData[0]);
         areaElem.setYArray(areaData[1]);
         areaElem.setWidthRatio(areaData[2]);
