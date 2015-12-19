@@ -1,28 +1,55 @@
+/**
+ * Holds a group of AreaElements
+ * @constructor
+ * @returns {AreaGroup}
+ */
 function AreaGroup() {
+    /*
+     * @type {AreaElement[]}
+     * @private
+     */
     this.elements = [];
+    
+    /*
+     * The pixel size for each block
+     * @type {Number}
+     */
     this.blockSize = 25;
 }
-
+/**
+ * Setter for the dataset name
+ * @param {String} name
+ * @returns {undefined}
+ */
 AreaGroup.prototype.setName = function(name) {
     this.name = name;
 }
 
+/**
+ * getter for the dataset name
+ * @returns {String}
+ */
 AreaGroup.prototype.getName = function() {
     return this.name;
 }
 
+/**
+ * Sets the blocksize and updates each element's blockSize
+ * @param {Number} block
+ * @returns {undefined}
+ */
 AreaGroup.prototype.setBlockSize = function(block) {
     this.blockSize = block;
     for(var i = 0; i < this.elements.length; i++){
         this.elements[i].setBlockSize(block);
-        //setXY is broken because only set once
     }
 }
 
-AreaGroup.prototype.setMaxColumns = function(maxCols) {
-    this.maxColumns = maxCols;
-}
-
+/**
+ * Find the maximum value from an array of Datasets
+ * @param {Dataset[]} dataSet
+ * @returns {Number}
+ */
 AreaGroup.prototype.findMaxData = function(dataSet) {
     var max = dataSet.at(0).getValue();
     for( var i = 1; i < dataSet.size(); i++ ) {
@@ -34,12 +61,18 @@ AreaGroup.prototype.findMaxData = function(dataSet) {
     return max;
 }
 
+/**
+ * Adds in AreaElements based on information from each dataset
+ * @param {Dataset[]} dataSet
+ * @param {Number[]} RGBcolor
+ * @returns {undefined}
+ */
 AreaGroup.prototype.addDataPoints = function(dataSet, RGBcolor) {
     var maxValue = this.findMaxData(dataSet);
+    var maxValue = 50000;
     for( var i = 0; i < dataSet.size(); i++ ) {
         var dataPiece = dataSet.at(i);
         var areaElem = new AreaElement();
-        //console.log(dataPiece.getValue()/maxValue);
         var areaData = AREA_LOCS[dataPiece.getName()];
         areaElem.setXArray(areaData[0]);
         areaElem.setYArray(areaData[1]);
@@ -55,6 +88,13 @@ AreaGroup.prototype.addDataPoints = function(dataSet, RGBcolor) {
     }
 }
 
+/**
+ * Hit tests and finds if one AreaElement has been selected
+ * If onoe has been selected, move it up to the end
+ * to be drawn last
+ * @param {Point} position
+ * @returns {AreaElement}
+ */
 AreaGroup.prototype.hitTestAndFind = function(position) {
     for( var i = this.elements.length - 1; i >= 0; i-- ) {
         //only going to contain classes instance of HitTestable
@@ -69,19 +109,34 @@ AreaGroup.prototype.hitTestAndFind = function(position) {
     return null;
 }
 
+/**
+ * Draws each AreaElement
+ * @param {Canvas} g
+ * @returns {undefined}
+ */
 AreaGroup.prototype.draw = function(g) {
     for( var i = 0; i < this.elements.length; i++ ) {
         this.elements[i].draw(g);
     }
 }
 
+/**
+ * Resets the position of each element back to its default location
+ * @returns {undefined}
+ */
 AreaGroup.prototype.resetDataPosition = function() {
     for( var i = 0; i < this.elements.length; i++ ) {
         this.elements[i].setXY();
     }
 }
 
-AreaGroup.prototype.resizeCanvas = function(width, height){
+/**
+ * Resizes the blocksize beased on new window dimensions
+ * @param {Number} width
+ * @param {Number} height
+ * @returns {undefined}
+ */
+AreaGroup.prototype.resizeCanvas = function(width, height) {
     if(height/35 < width/28){
         this.setBlockSize(parseInt(height/35));
     }

@@ -1,3 +1,7 @@
+/**
+ * Details the xArray, yArray, widthRatio, heightRatio
+ * @type {Object}
+ */
 var AREA_LOCS = {
     "O\'Hare" :             [0, 2, 3, 3],
     OHare :                 [0, 2, 3, 3],
