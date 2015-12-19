@@ -42,7 +42,7 @@ Button.prototype.draw = function(g) {
 }
 
 Button.prototype.resizeCanvas = function(width, height){
-    
+    console.log("generic button");
 }
 
 function ChangeDataSetButton() {
@@ -54,6 +54,12 @@ ChangeDataSetButton.prototype.onClick = function() {
     this.parent.changePage();
 }
 
+ChangeDataSetButton.prototype.resizeCanvas = function(width, height){
+    console.log("ChangeDataButon");
+    Button.prototype.resizeCanvas.call(this, width, height);
+    this.setPosition(new Point(width - this.width, this.point.getY()));
+}
+
 function ResetButton() {
    
 }
@@ -61,4 +67,10 @@ ResetButton.prototype = new Button();
 
 ResetButton.prototype.onClick = function() {
     this.parent.resetDataPosition();
+}
+
+ResetButton.prototype.resizeCanvas = function(width, height){
+    console.log("ResetButon");
+    Button.prototype.resizeCanvas.call(this, width, height);
+    this.setPosition(new Point(width - this.width, this.point.getY()));
 }

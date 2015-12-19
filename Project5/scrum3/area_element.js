@@ -61,7 +61,7 @@ AreaElement.prototype.draw = function(g) {
     var colorPercent = this.findColor();
     g.fillStyle = colorPercent;
     g.strokeStyle = "black";
-    g.lineWidth = 1;
+    g.lineWidth = parseInt(window.devicePixelRatio);
     g.beginPath();
     g.rect(this.point.getX(), this.point.getY(),
         this.widthRatio * this.blockSize, this.heightRatio * this.blockSize);
@@ -71,6 +71,7 @@ AreaElement.prototype.draw = function(g) {
     if(this.active) {
         this.drawText(g);
     }
+    
     g.fillStyle = colorPercent;
 }
 

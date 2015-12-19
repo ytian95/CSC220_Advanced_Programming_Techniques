@@ -35,9 +35,7 @@ ElementManager.prototype.initializeData = function(numDataSets) {
     button2.setParent(this);
     this.add(button2);
     
-    console.log("resizing initial chicoage");
-    this.resizeCanvas(window.innerWidth*window.devicePixelRatio, 
-        window.innerHeight*window.devicePixelRatio);
+    this.resizeCanvas(window.innerWidth, window.innerHeight);
 }
 
 ElementManager.prototype.draw = function(g) {
@@ -56,6 +54,7 @@ ElementManager.prototype.draw = function(g) {
 ElementManager.prototype.resizeCanvas = function(width, height){
     for(var i = 0; i < this.elements.length; i++){
         this.elements[i].resizeCanvas(width, height);
+        console.log(this.elements[i].resizeCanvas);
     }
 }
 

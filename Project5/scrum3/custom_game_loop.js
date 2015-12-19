@@ -28,12 +28,13 @@ CustomGameLoop.prototype.onWindowResize = function(){
 }
 
 CustomGameLoop.prototype.resizeCanvas = function(){
-    
     this.canvas.width = window.innerWidth * this.devicePixelRatio;
     this.canvas.height = window.innerHeight * this.devicePixelRatio;
     this.canvas.style.width = window.innerWidth + "px";
     this.canvas.style.height = window.innerHeight + "px";
-    this.elementManager.resizeCanvas(this.canvas.width, this.canvas.height);
+    
+    this.elementManager.resizeCanvas(window.innerWidth, window.innerHeight);
+    //this.elementManager.resizeCanvas(this.canvas.width, this.canvas.height);
 }
 
 CustomGameLoop.prototype.setCanvasSize = function(width, height) {
@@ -58,14 +59,17 @@ CustomGameLoop.prototype.getDataManager = function() {
 }
 
 CustomGameLoop.prototype.draw = function(g) {
+    g.save();
+        g.scale(this.devicePixelRatio, this.devicePixelRatio);
     g.fillStyle = "lightgray";
-    //g.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    g.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    g.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    //g.fillRect(0, 0, window.innerWidth, window.innerHeight);
     
     if(this.dataManager.isAllLoaded()){
         this.drawCurrentName(g);
         this.elementManager.draw(g);
     }
+    g.restore();
 }
 
 CustomGameLoop.prototype.drawCurrentName = function(g) {
