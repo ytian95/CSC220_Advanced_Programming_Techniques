@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: button.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: button.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * A generic button class
+ * @constructor
+ * @returns {Button}
+ */
+function Button() {
+    /*
+     * @type {boolean}
+     * @private
+     */
+    this.isHovered = false;
+    
+    /**
+     * @type {Color}
+     * @private
+     */
+    this.color = "green";
+}
+Button.prototype = new HitTestableElement();
+
+/**
+ * Sets the text of the button
+ * @param {String} text
+ * @returns {undefined}
+ */
+Button.prototype.setText = function(text) {
+    this.text = text;
+}
+
+/**
+ * Sets the parent of the button
+ * @param {ElementManager} parent
+ * @returns {undefined}
+ */
+Button.prototype.setParent = function(parent) {
+    this.parent = parent;
+}
+
+/**
+ * Toggles if the button has been pressed or not
+ * @param {Boolean} bool
+ * @returns {undefined}
+ */
+Button.prototype.setHovered = function(bool) {
+    this.isHovered = bool;
+}
+
+/**
+ * When the button has been clicked. Specific per button type
+ * @returns {undefined}
+ */
+Button.prototype.onClick = function() {
+}
+
+/**
+ * When the button has been clicked, activate it
+ * @param {Point} position
+ * @returns {undefined}
+ */
+Button.prototype.activate = function(position) {
+    this.setHovered(true);
+    this.onClick();
+}
+
+/**
+ * The pointer has left the button. unactivate it
+ * @returns {undefined}
+ */
+Button.prototype.deactivate = function() {
+    this.setHovered(false)
+}
+
+/**
+ * Changes the button color depending on whether it is active
+ * @returns {undefined}
+ */
+Button.prototype.setColor = function() {
+    if(this.isHovered){
+        this.color = "yellow";
+    }
+    else{
+        this.color = "green";
+    }
+}
+
+/**
+ * Draws a green button with text inside
+ * @param {Canvas} g
+ * @returns {undefined}
+ */
+Button.prototype.draw = function(g) {
+    this.setColor();
+    g.fillStyle = this.color;
+    g.fillRect(this.point.getX(), this.point.getY(),
+        this.width, this.height);
+
+    g.fillStyle = "black";
+    var fontSize = 20;
+    g.font = fontSize + "px Arial";
+    g.fillText(this.text, this.point.getX(), 
+            this.point.getY() + this.height/2);
+}
+
+/**
+ * 
+ * @param {Number} width
+ * @param {Number} height
+ * @returns {undefined}
+ */
+Button.prototype.resizeCanvas = function(width, height) {
+}
+
+/**
+ * A button when pressed changes the dataset being viewed
+ * @returns {ChangeDataSetButton}
+ */
+function ChangeDataSetButton() {
+    
+}
+ChangeDataSetButton.prototype = new Button();
+
+/**
+ * When the button has been clicked, let the parent know to
+ * change the page
+ * @constructor
+ * @returns {undefined}
+ */
+ChangeDataSetButton.prototype.onClick = function() {
+    this.parent.changePage();
+}
+
+/**
+ * When the button is selected, make it active and perform the
+ * onClick
+ * @param {Point} position
+ * @returns {undefined}
+ */
+ChangeDataSetButton.prototype.activate = function(position) {
+    Button.prototype.activate.call(this, position);
+    this.onClick();
+}
+
+/**
+ * When the canvas has been resized change its location
+ * @param {Number} width
+ * @param {Number} height
+ * @returns {undefined}
+ */
+ChangeDataSetButton.prototype.resizeCanvas = function(width, height) {
+    Button.prototype.resizeCanvas.call(this, width, height);
+    this.setPosition(new Point(width - this.width, this.point.getY()));
+}
+
+/**
+ * Creates a button that when pressed resets the AreaElements
+ * cack to their default locations
+ * @constructor
+ * @returns {ResetButton}
+ */
+function ResetButton() {
+   
+}
+ResetButton.prototype = new Button();
+
+/**
+ * When pressed let the parent elementManager know to reset the
+ * element position
+ * @returns {undefined}
+ */
+ResetButton.prototype.onClick = function() {
+    this.parent.resetDataPosition();
+}
+
+/**
+ * When the button is selected, make it active and perform the
+ * onClick
+ * @param {Point} position
+ * @returns {undefined}
+ */
+ResetButton.prototype.activate = function(position) {
+    Button.prototype.activate.call(this, position);
+    this.onClick();
+}
+
+/**
+ * When the canvas has been resized change its location
+ * @param {Number} width
+ * @param {Number} height
+ * @returns {undefined}
+ */
+ResetButton.prototype.resizeCanvas = function(width, height) {
+    Button.prototype.resizeCanvas.call(this, width, height);
+    this.setPosition(new Point(width - this.width, this.point.getY()));
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Button.html">Button</a></li><li><a href="ChangeDataSetButton_onClick.html">onClick</a></li><li><a href="ResetButton.html">ResetButton</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ChangeDataSetButton">ChangeDataSetButton</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Fri Dec 18 2015 23:55:08 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
